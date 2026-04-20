@@ -70,7 +70,7 @@ export function loadState(accountId: string): Partial<SubAccountState> | null {
       hrefThreshold: persisted.hrefThreshold,
       pausedSymbols: new Map(Object.entries(persisted.pausedSymbols || {})),
       drawdownPausedSymbols: new Map(Object.entries(persisted.drawdownPausedSymbols || {})),
-      takeProfitThreshold: persisted.takeProfitThreshold ?? (persisted as any).takeProfitMode ? 1 : 0,
+      takeProfitThreshold: persisted.takeProfitThreshold ?? ((persisted as any).takeProfitMode ? 1 : 0),
       positionSizeMultiplier: persisted.positionSizeMultiplier,
       orderType: persisted.orderType,
       positionPeaks: new Map(Object.entries(persisted.positionPeaks || {}))
