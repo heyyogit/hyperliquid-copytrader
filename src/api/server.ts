@@ -22,7 +22,9 @@ interface AccountContext {
 const app = express()
 const globalConfig = loadMultiAccountConfig()
 const PORT = globalConfig.dashboardPort
-const HOST = '0.0.0.0'
+// Bind to loopback by default — dashboard has no auth, expose only via SSH tunnel or reverse proxy.
+// To allow LAN access, change to '0.0.0.0' and firewall port 3000 to trusted IPs.
+const HOST = process.env.DASHBOARD_HOST || '127.0.0.1'
 const DATA_DIR = path.join(__dirname, '../../data')
 const FRONTEND_DIR = path.join(__dirname, '../../frontend')
 
