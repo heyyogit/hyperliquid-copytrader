@@ -13,6 +13,8 @@ interface TrackedWalletContext {
 export class TrackedWalletManager {
   private wallets: Map<string, TrackedWalletContext> = new Map()
 
+  constructor(private isTestnet: boolean = false) {}
+
   async subscribeAccount(
     trackedWallet: string,
     accountId: string,
@@ -23,7 +25,7 @@ export class TrackedWalletManager {
 
     if (!this.wallets.has(normalizedWallet)) {
       const fillQueue = new FillQueueService()
-      const pool = new WebSocketPoolService(fillQueue)
+      const pool = new WebSocketPoolService(fillQueue, this.isTestnet)
 
       const context: TrackedWalletContext = {
         trackedWallet: normalizedWallet,

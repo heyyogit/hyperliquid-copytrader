@@ -14,9 +14,9 @@ export class WebSocketPoolService {
   private readonly POOL_SIZE = 3
   private healthCheckInterval: NodeJS.Timeout | null = null
 
-  constructor(private fillQueue: FillQueueService) {
+  constructor(private fillQueue: FillQueueService, private isTestnet: boolean = false) {
     for (let i = 0; i < this.POOL_SIZE; i++) {
-      this.connections.push(new WebSocketConnectionService(i + 1, fillQueue))
+      this.connections.push(new WebSocketConnectionService(i + 1, fillQueue, isTestnet))
     }
   }
 

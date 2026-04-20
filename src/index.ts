@@ -55,7 +55,7 @@ async function main(): Promise<void> {
   const telegramService = new TelegramService(globalConfig.telegram)
   telegramService.setHyperliquidService(hyperliquidService)
 
-  const trackedWalletManager = new TrackedWalletManager()
+  const trackedWalletManager = new TrackedWalletManager(globalConfig.isTestnet)
   const accountContexts: Map<string, AccountContext> = new Map()
 
   for (const accountConfig of enabledAccounts) {

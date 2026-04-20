@@ -1,7 +1,6 @@
 import { EventClient, WebSocketTransport, WsUserFills } from '@nktkas/hyperliquid'
 import { UserFillData } from '@/models'
 import { FillQueueService } from './fill-queue.service'
-import { config } from '@/config'
 
 export interface ConnectionStats {
   id: number
@@ -23,13 +22,14 @@ export class WebSocketConnectionService {
 
   constructor(
     private connectionId: number,
-    private fillQueue: FillQueueService
+    private fillQueue: FillQueueService,
+    private isTestnet: boolean = false
   ) {}
 
   async initialize(trackedWallet: string): Promise<void> {
     this.trackedWallet = trackedWallet
 
-    const wsUrl = config.isTestnet
+    const wsUrl = this.isTestnet
       ? 'wss://api.hyperliquid-testnet.xyz/ws'
       : 'wss://api.hyperliquid.xyz/ws'
 
